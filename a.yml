@@ -3,6 +3,17 @@
   connection: local
   become: yes
   tasks:
+    - name: Debug .xinitrc destination path
+      debug:
+        msg: "/home/{{ ansible_user_id }}/.xinitrc"
+
+    - name: Gather facts
+      setup:
+
+    - name: Print all gathered facts
+      debug:
+        var: ansible_facts
+
     - name: Install necessary packages
       pacman:
         name:
