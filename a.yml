@@ -1,5 +1,6 @@
 ---
-- hosts: all
+- hosts: localhost
+  connection: local
   become: yes
   tasks:
     - name: Install necessary packages
@@ -98,14 +99,37 @@
         owner: "{{ ansible_user_id }}"
         group: "{{ ansible_user_id }}"
 
-    - name: Enable bspwm on startup
-      lineinfile:
-        path: "/home/{{ ansible_user_id }}/.xinitrc"
-        create: yes
-        line: "exec bspwm"
+    - name: Copy .xinitrc file to user's home directory
+      copy:
+        dest: "/home/{{ ansible_user_id }}/.xinitrc"
+        content: |
+          #!/bin/sh
+          # Set up an environment variable, if needed
+          export SOME_VARIABLE="value"
+
+          # Start some background applications
+          xsetroot -solid grey &  # Set a solid grey background
+          xrdb -merge ~/.Xresources &  # Load X resources (like terminal colors, fonts, etc.)
+
+          # Set the background image using feh
+          feh --bg-scale /home/{{ ansible_user_id }}/background.jpg &
+
+          # Launch a terminal
+          terminator &  # Replace 'terminator' with your preferred terminal emulator
+
+          # Start the window manager or desktop environment
+          exec bspwm
         owner: "{{ ansible_user_id }}"
         group: "{{ ansible_user_id }}"
         mode: '0755'
+
+    - name: Copy background image to user's home directory
+      copy:
+        src: /path/to/your/local/background.jpg  # Update this path to your local file
+        dest: "/home/{{ ansible_        user_id }}/background.jpg"
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
+        mode: '0644'
 
     - name: Ensure permissions are correct for the user's config directory
       file:
@@ -114,14 +138,6 @@
         owner: "{{ ansible_user_id }}"
         group: "{{ ansible_user_id }}"
         recurse: yes
-
-    - name: Copy background image to user's home directory
-      copy:
-        src: background.jpg  # Update this path to your local file
-        dest: "/home/{{ ansible_user_id }}/background.jpg"
-        owner: "{{ ansible_user_id }}"
-        group: "{{ ansible_user_id }}"
-        mode: '0644'
 
     - name: Set the background image in bspwm config
       lineinfile:
