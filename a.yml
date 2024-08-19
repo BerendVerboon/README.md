@@ -226,6 +226,12 @@
           # Set the background image using feh
           feh --bg-scale /home/{{ target_user }}/background.jpg &
 
+          # Start libinput-gestures
+          libinput-gestures-setup start &
+
+          # Launch polybar
+          polybar example &
+
           # Launch a terminal
           terminator &  # Replace 'terminator' with your preferred terminal emulator
 
@@ -234,7 +240,6 @@
         owner: "{{ target_user }}"
         group: "{{ target_user }}"
         mode: '0755'
-
     - name: Copy background image to user's home directory
       copy:
         src: /home/john/readme.md/background.jpg
