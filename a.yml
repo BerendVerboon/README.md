@@ -9,7 +9,8 @@
           - bspwm
           - sxhkd
           - terminator
-          - xorg-xinit  # Added xorg-xinit to the list of packages
+          - xorg-xinit
+          - xterm  # Added xterm to the list of packages
         state: present
 
     - name: Ensure .config directory exists for user
@@ -90,3 +91,23 @@
         owner: "{{ ansible_user_id }}"
         group: "{{ ansible_user_id }}"
         recurse: yes
+
+    - name: Configure automatic startx on login for bash users
+      lineinfile:
+        path: "/home/{{ ansible_user_id }}/.bash_profile"
+        create: yes
+        line: '[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx'
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
+        mode: '0644'
+      when: ansible_shell_type == 'bash'
+
+    - name: Configure automatic startx on login for zsh users
+      lineinfile:
+        path: "/home/{{ ansible_user_id }}/.zprofile"
+        create: yes
+        line: '[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx'
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
+        mode: '0644'
+      when: ansible_shell_type == 'zsh'
