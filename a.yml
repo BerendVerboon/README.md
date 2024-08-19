@@ -3,7 +3,7 @@
   connection: local
   become: yes
   vars:
-    target_user: "{{ target_user | default(lookup('env','USER')) }}"  # Fallback to the current user if target_user is not defined
+    target_user: john  # Fallback to the current user if target_user is not defined
 
   tasks:
     - name: Debug .xinitrc destination path
