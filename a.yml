@@ -9,6 +9,7 @@
           - bspwm
           - sxhkd
           - terminator
+          - xorg-xinit  # Added xorg-xinit to the list of packages
         state: present
 
     - name: Ensure .config directory exists for user
