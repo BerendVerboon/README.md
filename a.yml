@@ -125,7 +125,7 @@
 
     - name: Copy background image to user's home directory
       copy:
-        src: /home/user/readme.md/background.jpg  # Update this path to your local file
+        src: /home/john/readme.md/background.jpg  # Update this path to your local file
         dest: "/home/{{ ansible_user_id }}/background.jpg"
         owner: "{{ ansible_user_id }}"
         group: "{{ ansible_user_id }}"
