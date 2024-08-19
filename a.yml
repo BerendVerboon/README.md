@@ -22,7 +22,7 @@
           - feh
           - xorg-xauth
           - polybar
-          - libinput-gestures
+#          - libinput-gestures
         state: present
 
     - name: Ensure home directory permissions are correct
