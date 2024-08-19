@@ -3,7 +3,7 @@
   connection: local
   become: yes
   vars:
-    target_user: john  # Fallback to the current user if target_user is not defined
+    target_user: target_user: "{{ target_user }}"
 
   tasks:
     - name: Debug .xinitrc destination path
@@ -181,9 +181,21 @@
           font-0 = "xos4 Terminus:size=10;1"
           font-1 = "siji:pixelsize=10;1"
 
-          modules-left = 
+          modules-left = bspwm
           modules-center = 
           modules-right = myclock
+
+          [module/bspwm]
+          type = internal/bspwm
+          format = <label-monitors>
+          label-monitors = <label-monitor> <label-desktops>
+          label-monitor-foreground = #8FBCBB
+          label-urgent-background = #BF616A
+          label-urgent-foreground = #ECEFF4
+          label-focused-background = #5E81AC
+          label-focused-foreground = #ECEFF4
+          label-occupied-foreground = #D08770
+          label-empty-foreground = #656D78
 
           [module/myclock]
           type = internal/date
