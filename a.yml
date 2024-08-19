@@ -136,8 +136,8 @@
           bspc config split_ratio 0.52
           bspc config borderless_monocle true
           bspc config gapless_monocle true
-          bspc rule -a Gimp desktop='^8' state=floating follow=on
-          rule -a Chromium desktop='^2'
+          bspc rule -a Gimp desktop='^8' state=floating           follow=on
+          bspc rule -a Chromium desktop='^2'
           bspc rule -a mplayer2 state=floating
           bspc rule -a Kupfer.py focus=on
           bspc rule -a Screenkey manage=off
@@ -152,6 +152,55 @@
         owner: "{{ target_user }}"
         group: "{{ target_user }}"
         mode: '0755'
+
+    - name: Copy polybar configuration
+      copy:
+        dest: "/home/{{ target_user }}/.config/polybar/config"
+        content: |
+          [bar/example]
+          width = 100%
+          height = 24
+          radius = 0
+          fixed-center = false
+
+          background = #222
+          foreground = #fff
+
+          line-size = 3
+          line-color = #f00
+
+          border-size = 0
+          border-color = #00000000
+
+          padding-left = 0
+          padding-right = 2
+
+          module-margin-left = 1
+          module-margin-right = 2
+
+          font-0 = "xos4 Terminus:size=10;1"
+          font-1 = "siji:pixelsize=10;1"
+
+          modules-left = 
+          modules-center = 
+          modules-right = myclock
+
+          [module/myclock]
+          type = internal/date
+          interval = 1.0
+
+          date = "%Y-%m-%d"
+          time = "%H:%M:%S"
+
+          format-prefix = " "
+          format-prefix-foreground = #555
+          format-foreground = #fff
+          format-background = #222
+
+          label = %date% %time%
+        owner: "{{ target_user }}"
+        group: "{{ target_user }}"
+        mode: '0644'
 
     - name: Copy .xinitrc file to user's home directory
       copy:
@@ -176,35 +225,6 @@
 
           # Start the window manager or desktop environment
           exec bspwm
-        owner: "{{ target_user }}"
-        group: "{{ target_user }}"
-        mode: '0755'
-
-    - name: Copy background image to user's home directory
-      copy:
-        src: /home/john/readme.md/background.jpg  # Update this path to the correct location of your background image
-        dest: "/home/{{ target_user }}/background.jpg"
-        owner: "{{ target_user }}"
-        group: "{{ target_user }}"
-        mode: '0644'
-
-    - name: Enable libinput-gestures for user
-      copy:
-        dest: "/home/{{ target_user }}/.config/libinput-gestures.conf"
-        content: |
-          gesture swipe up 3 xdotool key super+Up
-          gesture swipe down 3 xdotool key super+Down
-          gesture swipe left 3 xdotool key super+Left
-          gesture swipe right 3 xdotool key super+Right
-        owner: "{{ target_user }}"
-        group: "{{ target_user }}"
-        mode: '0644'
-
-    - name: Start libinput-gestures on login
-      lineinfile:
-        path: "/home/{{ target_user }}/.xinitrc"
-        insertbefore: "exec bspwm"
-        line: "libinput-gestures-setup start &"
         owner: "{{ target_user }}"
         group: "{{ target_user }}"
         mode: '0755'
