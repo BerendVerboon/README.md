@@ -152,3 +152,25 @@
         owner: "{{ ansible_user_id }}"
         group: "{{ ansible_user_id }}"
         mode: '0755'
+
+    - name: Add user to tty group
+      user:
+        name: "{{ ansible_user_id }}"
+        groups: tty
+        append: yes
+
+    - name: Set correct permissions for TTY devices
+      file:
+        path: "{{ item }}"
+        mode: '0620'
+        owner: root
+        group: tty
+      with_items:
+        - /dev/tty1
+        - /dev/tty2
+        - /dev/tty3
+        - /dev/tty4
+        - /dev/tty5
+        - /dev/tty6
+        - /dev/tty7
+        - /dev/tty8
