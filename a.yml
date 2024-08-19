@@ -22,7 +22,7 @@
           - feh
           - xorg-xauth
           - polybar
-          # - libinput-gestures  # Uncomment this line if you want to install libinput-gestures
+          - xf86-input-libinput
         state: present
 
     - name: Ensure home directory permissions are correct
