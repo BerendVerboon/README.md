@@ -194,7 +194,17 @@
 
           [module/myclock]
           type = internal/date
-          ; Additional configurations for clock module here.
+          interval = 1.0
+
+          date = "%Y-%m-%d"
+          time = "%H:%M:%S"
+
+          format-prefix = " "
+          format-prefix-foreground = #555
+          format-foreground = #fff
+          format-background = #222
+
+          label = %date% %time%
 
           ; CPU usage module
           [module/cpu]
@@ -212,9 +222,9 @@
           [module/disk]
           type = internal/disk
           interval = 30
-          mount-0 = /
+          mount-0 = /home/john
           label-mounted =  %free%
-          
+
           ; Volume module (requires `alsa-utils`)
           [module/pulseaudio]
           type = internal/pulseaudio
