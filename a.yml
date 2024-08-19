@@ -132,7 +132,7 @@
 
     - name: Copy background image to user's home directory
       copy:
-        src: /path/to/your/background.jpg
+        src: /home/john/readme.md/background.jpg
         dest: "/home/{{ target_user }}/background.jpg"
         owner: "{{ target_user }}"
         group: "{{ target_user }}"
