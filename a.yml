@@ -36,7 +36,7 @@
           - iptables         # Required to set up NAT forwarding on the default network
           - ebtables         # Optional, used for bridging
           - openbsd-netcat   # Required for certain libvirt communications
-       state: present
+        state: present
 
     - name: Enable and start the libvirtd service
       systemd:
