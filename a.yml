@@ -185,7 +185,7 @@
           font-1 = "siji:pixelsize=10;1"
           
           modules-left = bspwm
-          modules-center = cpu memory disk
+          modules-center = cpu memory disk lan
           modules-right = pulseaudio myclock
 
           [module/bspwm]
@@ -223,8 +223,13 @@
           type = internal/fs
           interval = 30
           mount-0 = /
-          mount-1 = /home/john
           label-mounted =  %free%
+
+          [module/lan]
+          type = internal/network
+          interface = enp0s3
+          label-connected = "%ifname%: %local_ip% %local_ip6% | "
+          ;label-disconnected = "%ifname%: not connected | "
 
           ; Volume module (requires `alsa-utils`)
           [module/pulseaudio]
