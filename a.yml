@@ -26,13 +26,9 @@
           - alsa-utils
           - lm_sensors
           - sysstat
-          - zsh
+          - virt-manager
+          - qemu
         state: present
-
-    - name: Set zsh as default shell for target user
-      user:
-        name: "{{ target_user }}"
-        shell: "/usr/bin/zsh"
 
     - name: Set timezone to Amsterdam
       timezone:
@@ -154,6 +150,27 @@
           bspc rule -a mplayer2 state=floating
           bspc rule -a Kupfer.py focus=on
           bspc rule -a Screenkey manage=off
+        owner: "{{ target_user }}"
+        group: "{{ target_user }}"
+        mode: '0755'
+
+    - name: Ensure .config/bspwm directory exists
+      file:
+        path: "/home/{{ target_user }}/.config/bspwm"
+        state: directory
+        owner: "{{ target_user }}"
+        group: "{{ target_user }}"
+        mode: '0755'
+
+    - name: Start virt-manager on workspace 1 on bspwm
+      blockinfile:
+        path: "/home/{{ target_user }}/.config/bspwm/bspwmrc"
+        block: |
+          # Launch virt-manager on workspace 1
+          bspc rule -a virt-manager-desktop desk='^1' follow=on
+          virt-manager &
+        marker: "# {mark} ANSIBLE MANAGED BLOCK FOR VIRT-MANAGER"
+        create: yes
         owner: "{{ target_user }}"
         group: "{{ target_user }}"
         mode: '0755'
