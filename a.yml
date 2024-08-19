@@ -12,7 +12,24 @@
           - xorg-xinit
           - xterm
           - feh
+          - xorg-xauth
         state: present
+
+    - name: Ensure home directory permissions are correct
+      file:
+        path: "/home/{{ ansible_user_id }}"
+        state: directory
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
+        mode: '0755'
+
+    - name: Ensure .Xauthority file exists
+      file:
+        path: "/home/{{ ansible_user_id }}/.Xauthority"
+        state: touch
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
+        mode: '0600'
 
     - name: Ensure .config directory exists for user
       file:
