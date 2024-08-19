@@ -28,7 +28,7 @@
           - sysstat
           - virt-manager
           - qemu
-          - qemu-arch-extra  # This package contains the KVM modules for Arch Linux
+          #- qemu-arch-extra  # This package contains the KVM modules for Arch Linux
           - libvirt
           - virt-install
           - bridge-utils
