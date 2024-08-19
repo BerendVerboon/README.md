@@ -3,7 +3,7 @@
   connection: local
   become: yes
   vars:
-    target_user: "{{ target_user }}"
+    target_user: john
 
   tasks:
     - name: Debug .xinitrc destination path
