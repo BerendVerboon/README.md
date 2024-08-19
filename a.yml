@@ -112,7 +112,7 @@
           xrdb -merge ~/.Xresources &  # Load X resources (like terminal colors, fonts, etc.)
 
           # Set the background image using feh
-          feh --bg-scale /home/{{ ansible_user_id }}/background.jpg &
+          feh --bg-scale /home/john/background.jpg &
 
           # Launch a terminal
           terminator &  # Replace 'terminator' with your preferred terminal emulator
