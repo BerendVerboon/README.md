@@ -23,6 +23,9 @@
           - xorg-xauth
           - polybar
           - xf86-input-libinput
+          - alsa-utils
+          - lm_sensors
+          - sysstat
         state: present
 
     - name: Ensure home directory permissions are correct
@@ -162,54 +165,74 @@
           height = 24
           radius = 0
           fixed-center = false
-
+          
           background = #222
           foreground = #fff
-
+          
           line-size = 3
           line-color = #f00
 
           border-size = 0
-          border-color = #00000000
-
+          border-color = #00000000  
+          
           padding-left = 0
           padding-right = 2
 
           module-margin-left = 1
           module-margin-right = 2
-
+        
           font-0 = "xos4 Terminus:size=10;1"
           font-1 = "siji:pixelsize=10;1"
-
+          
           modules-left = bspwm
-          modules-center = 
-          modules-right = myclock
+          modules-center = cpu memory disk
+          modules-right = pulseaudio myclock
 
           [module/bspwm]
           type = internal/bspwm
-          format = <label-monitors>
-          label-monitors = <label-monitor> <label-desktops>
-          label-monitor-foreground = #8FBCBB
-          label-urgent-background = #BF616A
-          label-urgent-foreground = #ECEFF4
-          label-focused-background = #5E81AC
-          label-focused-foreground = #ECEFF4
-          label-occupied-foreground = #D08770
-          label-empty-foreground = #656D78
+          ; Additional configurations for bspwm module here.
 
           [module/myclock]
           type = internal/date
-          interval = 1.0
+          ; Additional configurations for clock module here.
 
-          date = "%Y-%m-%d"
-          time = "%H:%M:%S"
+          ; CPU usage module
+          [module/cpu]
+          type = internal/cpu
+          interval = 2.0
+          label = CPU %usage%
 
-          format-prefix = " "
-          format-prefix-foreground = #555
-          format-foreground = #fff
-          format-background = #222
+          ; Memory usage module
+          [module/memory]
+          type = internal/memory
+          interval = 2.0
+          label = MEM %percentage_used%%
 
-          label = %date% %time%
+          ; Disk usage module
+          [module/disk]
+          type = internal/disk
+          interval = 30
+          mount-0 = /
+          label-mounted =  %free%
+          
+          ; Volume module (requires `alsa-utils`)
+          [module/pulseaudio]
+          type = internal/pulseaudio
+          format-volume = <label-volume> <bar-volume>
+          label-volume = VOL %percentage%%
+          label-volume-foreground = #a1b56c  ; volume color
+          label-muted = VOL MUTED
+          label-muted-foreground = #ab4642  ; muted color
+          bar-volume-width = 10
+          bar-volume-foreground-0 = #a1b56c  ; volume level - gradient start
+          bar-volume-foreground-1 = #b8db81  ; volume level - gradient end
+          bar-volume-indicator = |
+          bar-volume-fill = -
+          bar-volume-empty = -
+          bar-volume-empty-foreground = #343d46  ; volume empty color
+          bar-volume-gradient = false
+
+          ; Further module configurations as needed...
         owner: "{{ target_user }}"
         group: "{{ target_user }}"
         mode: '0644'
