@@ -26,7 +26,17 @@
           - alsa-utils
           - lm_sensors
           - sysstat
+          - zsh
         state: present
+
+    - name: Set zsh as default shell for target user
+      user:
+        name: "{{ target_user }}"
+        shell: "/usr/bin/zsh"
+
+    - name: Set timezone to Amsterdam
+      timezone:
+        name: Europe/Amsterdam
 
     - name: Ensure home directory permissions are correct
       file:
@@ -237,8 +247,8 @@
           [module/lan]
           type = internal/network
           interface = enp0s3
-          label-connected = "%ifname%: %local_ip% | "
-          label-disconnected = "%ifname%: not connected | "
+          label-connected = "%ifname%: %local_ip% |"
+          label-disconnected = "%ifname%: not connected |"
 
           ; Volume module (requires `alsa-utils`)
           [module/pulseaudio]
