@@ -75,6 +75,42 @@
         group: "{{ target_user }}"
         mode: '0755'
 
+    - name: Ensure terminator config directory exists
+      file:
+        path: "/home/{{ target_user }}/.config/terminator"
+        state: directory
+        owner: "{{ target_user }}"
+        group: "{{ target_user }}"
+        mode: '0755'
+
+    - name: Configure terminator transparency
+      copy:
+        dest: "/home/{{ target_user }}/.config/terminator/config"
+        content: |
+          [global_config]
+          [keybindings]
+          [profiles]
+            [[default]]
+            background_darkness = 0.85
+            background_type = transparent
+          [layouts]
+          [plugins]
+        owner: "{{ target_user }}"
+        group: "{{ target_user }}"
+        mode: '0644'
+
+    - name: Configure sxhkd hotkeys for workspace switching
+      lineinfile:
+        path: "/home/{{ target_user }}/.config/sxhkd/sxhkdrc"
+        insertafter: EOF
+        line: |
+          # Workspace switching
+          super + {1-9,0}
+              bspc desktop -f '^{1-9,10}'
+        owner: "{{ target_user }}"
+        group: "{{ target_user }}"
+        mode: '0644'
+
     - name: Copy bspwm configuration
       copy:
         dest: "/home/{{ target_user }}/.config/bspwm/bspwmrc"
