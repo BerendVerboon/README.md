@@ -99,6 +99,18 @@
         group: "{{ target_user }}"
         mode: '0644'
 
+    - name: Configure sxhkd hotkey to open a new Terminator window
+      lineinfile:
+        path: "/home/{{ target_user }}/.config/sxhkd/sxhkdrc"
+        insertafter: EOF
+        line: |
+          # Open a new Terminator window
+          super + shift + Return
+              terminator
+        owner: "{{ target_user }}"
+        group: "{{ target_user }}"
+        mode: '0644'
+
     - name: Configure sxhkd hotkeys for workspace switching
       lineinfile:
         path: "/home/{{ target_user }}/.config/sxhkd/sxhkdrc"
