@@ -184,12 +184,9 @@
 
           [module/bspwm]
           type = internal/bspwm
-          label-focused = " " ; Replace with the icon for focused workspace
-          label-occupied = " " ; Replace with the icon for occupied workspace
-          label-empty = " "    ; Replace with the icon for empty workspace
-          ; Add more label settings for different workspace states as needed
-
-          ; ... rest of the polybar configuration ...
+          label-focused = "1"
+          label-occupied = "2"
+          label-empty = "3"
         owner: "{{ target_user }}"
         group: "{{ target_user }}"
         mode: '0644'
@@ -254,7 +251,5 @@
         owner: "{{ target_user }}"
         group: "{{ target_user }}"
         mode: '0755'
-
-    # Add any additional tasks here
 
 # End of playbook
