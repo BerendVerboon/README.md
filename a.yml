@@ -220,9 +220,10 @@
 
           ; Disk usage module
           [module/disk]
-          type = internal/disk
+          type = internal/fs
           interval = 30
-          mount-0 = /home/john
+          mount-0 = /
+          mount-1 = /home/john
           label-mounted =  %free%
 
           ; Volume module (requires `alsa-utils`)
