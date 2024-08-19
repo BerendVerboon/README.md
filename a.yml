@@ -112,7 +112,7 @@
           xrdb -merge ~/.Xresources &  # Load X resources (like terminal colors, fonts, etc.)
 
           # Set the background image using feh
-          feh --bg-scale /home/john/background.jpg &
+          feh --bg-scale /home/{{ ansible_user_id }}/background.jpg &
 
           # Launch a terminal
           terminator &  # Replace 'terminator' with your preferred terminal emulator
@@ -125,8 +125,8 @@
 
     - name: Copy background image to user's home directory
       copy:
-        src: /path/to/your/local/background.jpg  # Update this path to your local file
-        dest: "/home/{{ ansible_        user_id }}/background.jpg"
+        src: /home/user/readme.md/background.jpg  # Update this path to your local file
+        dest: "/home/{{ ansible_user_id }}/background.jpg"
         owner: "{{ ansible_user_id }}"
         group: "{{ ansible_user_id }}"
         mode: '0644'
