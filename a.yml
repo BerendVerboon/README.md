@@ -21,6 +21,8 @@
           - xterm
           - feh
           - xorg-xauth
+          - polybar
+          - libinput-gestures
         state: present
 
     - name: Ensure home directory permissions are correct
@@ -142,6 +144,64 @@
         mode: '0755'
         owner: "{{ target_user }}"
         group: "{{ target_user }}"
+
+    - name: Configure libinput-gestures for three-finger swipe
+      copy:
+        dest: "/home/{{ target_user }}/.config/libinput-gestures.conf"
+        content: |
+          gesture swipe left 3 bspc desktop -f next
+          gesture swipe right 3 bspc desktop -f prev
+        owner: "{{ target_user }}"
+        group: "{{ target_user }}"
+        mode: '0644'
+
+    - name: Ensure libinput-gestures is started with the session
+      lineinfile:
+        path: "/home/{{ target_user }}/.xinitrc"
+        insertbefore: "exec bspwm"
+        line: "libinput-gestures-setup start &"
+        owner: "{{ target_user }}"
+        group: "{{ target_user }}"
+        mode: '0755'
+
+    - name: Ensure polybar config directory exists
+      file:
+        path: "/home/{{ target_user }}/.config/polybar"
+        state: directory
+        owner: "{{ target_user }}"
+        group: "{{ target_user }}"
+        mode: '0755'
+
+    - name: Copy polybar configuration
+      copy:
+        dest: "/home/{{ target_user }}/.config/polybar/config"
+        content: |
+          [bar/example]
+          width = 100%
+          height = 24
+          bottom = false
+          modules-left = bspwm
+
+          [module/bspwm]
+          type = internal/bspwm
+          label-focused = " " ; Replace with the icon for focused workspace
+          label-occupied = " " ; Replace with the icon for occupied workspace
+          label-empty = " "    ; Replace with the icon for empty workspace
+          ; Add more label settings for different workspace states as needed
+
+          ; ... rest of the polybar configuration ...
+        owner: "{{ target_user }}"
+        group: "{{ target_user }}"
+        mode: '0644'
+
+    - name: Ensure polybar is started with the session
+      lineinfile:
+        path: "/home/{{ target_user }}/.xinitrc"
+        insertbefore: "exec bspwm"
+        line: "polybar example &"
+        owner: "{{ target_user }}"
+        group: "{{ target_user }}"
+        mode: '0755'
 
     - name: Copy sxhkd configuration
       copy:
