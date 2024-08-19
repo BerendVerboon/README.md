@@ -145,6 +145,76 @@
         group: "{{ target_user }}"
         mode: '0755'
 
+yaml
+Copy code
+
+---
+- hosts: localhost
+  connection: local
+  become: yes
+  vars:
+    target_user: "{{ target_user | default(lookup('env','USER')) }}"  # Fallback to the current user if target_user is not defined
+
+  tasks:
+    # ... (other tasks)
+
+    - name: Ensure polybar config directory exists
+      file:
+        path: "/home/{{ target_user }}/.config/polybar"
+        state: directory
+        owner: "{{ target_user }}"
+        group: "{{ target_user }}"
+        mode: '0755'
+
+    - name: Copy polybar configuration
+      copy:
+        dest: "/home/{{ target_user }}/.config/polybar/config"
+        content: |
+          [bar/example]
+          width = 100%
+          height = 24
+          radius = 0
+          fixed-center = false
+
+          background = #222
+          foreground = #fff
+
+          line-size = 3
+          line-color = #f00
+
+          border-size = 0
+          border-color = #00000000
+
+          padding-left = 0
+          padding-right = 2
+
+          module-margin-left = 1
+          module-margin-right = 2
+
+          font-0 = "xos4 Terminus:size=10;1"
+          font-1 = "siji:pixelsize=10;1"
+
+          modules-left = 
+          modules-center = 
+          modules-right = myclock
+
+          [module/myclock]
+          type = internal/date
+          interval = 1.0
+
+          date = "%Y-%m-%d %H:%M:%S"
+          time = "%H:%M:%S"
+
+          format-prefix = " "
+          format-prefix-foreground = #555
+          format-foreground = #fff
+          format-background = #222
+
+          label = %date% %time%
+        owner: "{{ target_user }}"
+        group: "{{ target_user }}"
+        mode: '0644'
+
     - name: Copy .xinitrc file to user's home directory
       copy:
         dest: "/home/{{ target_user }}/.xinitrc"
@@ -162,6 +232,9 @@
 
           # Launch polybar
           polybar example &
+
+          # Start Terminator
+          terminator &
 
           # Start the window manager or desktop environment
           exec bspwm
