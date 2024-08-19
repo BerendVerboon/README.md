@@ -10,7 +10,8 @@
           - sxhkd
           - terminator
           - xorg-xinit
-          - xterm  # Added xterm to the list of packages
+          - xterm
+          - feh
         state: present
 
     - name: Ensure .config directory exists for user
@@ -111,3 +112,20 @@
         group: "{{ ansible_user_id }}"
         mode: '0644'
       when: ansible_shell_type == 'zsh'
+
+    - name: Copy background image to user's home directory
+      copy:
+        src: /path/to/local/background.png
+        dest: "/home/{{ ansible_user_id }}/background.png"
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
+        mode: '0644'
+
+    - name: Set the background image in bspwm config
+      lineinfile:
+        path: "/home/{{ ansible_user_id }}/.config/bspwm/bspwmrc"
+        insertafter: EOF
+        line: 'feh --bg-scale /home/{{ ansible_user_id }}/background.png'
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
+        mode: '0755'
