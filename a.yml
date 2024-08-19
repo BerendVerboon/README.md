@@ -22,7 +22,7 @@
           - feh
           - xorg-xauth
           - polybar
-#          - libinput-gestures
+          # - libinput-gestures  # Uncomment this line if you want to install libinput-gestures
         state: present
 
     - name: Ensure home directory permissions are correct
@@ -137,79 +137,13 @@
           bspc config borderless_monocle true
           bspc config gapless_monocle true
           bspc rule -a Gimp desktop='^8' state=floating follow=on
-          bspc rule -a Chromium desktop='^2'
+          rule -a Chromium desktop='^2'
           bspc rule -a mplayer2 state=floating
           bspc rule -a Kupfer.py focus=on
           bspc rule -a Screenkey manage=off
-        mode: '0755'
-        owner: "{{ target_user }}"
-        group: "{{ target_user }}"
-
-    - name: Configure libinput-gestures for three-finger swipe
-      copy:
-        dest: "/home/{{ target_user }}/.config/libinput-gestures.conf"
-        content: |
-          gesture swipe left 3 bspc desktop -f next
-          gesture swipe right 3 bspc desktop -f prev
-        owner: "{{ target_user }}"
-        group: "{{ target_user }}"
-        mode: '0644'
-
-    - name: Ensure libinput-gestures is started with the session
-      lineinfile:
-        path: "/home/{{ target_user }}/.xinitrc"
-        insertbefore: "exec bspwm"
-        line: "libinput-gestures-setup start &"
         owner: "{{ target_user }}"
         group: "{{ target_user }}"
         mode: '0755'
-
-    - name: Ensure polybar config directory exists
-      file:
-        path: "/home/{{ target_user }}/.config/polybar"
-        state: directory
-        owner: "{{ target_user }}"
-        group: "{{ target_user }}"
-        mode: '0755'
-
-    - name: Copy polybar configuration
-      copy:
-        dest: "/home/{{ target_user }}/.config/polybar/config"
-        content: |
-          [bar/example]
-          width = 100%
-          height = 24
-          bottom = false
-          modules-left = bspwm
-
-          [module/bspwm]
-          type = internal/bspwm
-          label-focused = "1"
-          label-occupied = "2"
-          label-empty = "3"
-        owner: "{{ target_user }}"
-        group: "{{ target_user }}"
-        mode: '0644'
-
-    - name: Ensure polybar is started with the session
-      lineinfile:
-        path: "/home/{{ target_user }}/.xinitrc"
-        insertbefore: "exec bspwm"
-        line: "polybar example &"
-        owner: "{{ target_user }}"
-        group: "{{ target_user }}"
-        mode: '0755'
-
-    - name: Copy sxhkd configuration
-      copy:
-        dest: "/home/{{ target_user }}/.config/sxhkd/sxhkdrc"
-        content: |
-          # Logos key (Super_L is the left Win key)
-          super + Return
-              terminator
-        mode: '0644'
-        owner: "{{ target_user }}"
-        group: "{{ target_user }}"
 
     - name: Copy .xinitrc file to user's home directory
       copy:
@@ -226,35 +160,44 @@
           # Set the background image using feh
           feh --bg-scale /home/{{ target_user }}/background.jpg &
 
-          # Start libinput-gestures
-          libinput-gestures-setup start &
-
           # Launch polybar
           polybar example &
-
-          # Launch a terminal
-          terminator &  # Replace 'terminator' with your preferred terminal emulator
 
           # Start the window manager or desktop environment
           exec bspwm
         owner: "{{ target_user }}"
         group: "{{ target_user }}"
         mode: '0755'
+
     - name: Copy background image to user's home directory
       copy:
-        src: /home/john/readme.md/background.jpg
+        src: /path/to/your/background.jpg  # Update this path to the correct location of your background image
         dest: "/home/{{ target_user }}/background.jpg"
         owner: "{{ target_user }}"
         group: "{{ target_user }}"
         mode: '0644'
 
-    - name: Set the background image in bspwm config
+    - name: Enable libinput-gestures for user
+      copy:
+        dest: "/home/{{ target_user }}/.config/libinput-gestures.conf"
+        content: |
+          gesture swipe up 3 xdotool key super+Up
+          gesture swipe down 3 xdotool key super+Down
+          gesture swipe left 3 xdotool key super+Left
+          gesture swipe right 3 xdotool key super+Right
+        owner: "{{ target_user }}"
+        group: "{{ target_user }}"
+        mode: '0644'
+      when: "'libinput-gestures' in packages"
+
+    - name: Start libinput-gestures on login
       lineinfile:
-        path: "/home/{{ target_user }}/.config/bspwm/bspwmrc"
-        insertafter: EOF
-        line: 'feh --bg-scale /home/{{ target_user }}/background.jpg'
+        path: "/home/{{ target_user }}/.xinitrc"
+        insertbefore: "exec bspwm"
+        line: "libinput-gestures-setup start &"
         owner: "{{ target_user }}"
         group: "{{ target_user }}"
         mode: '0755'
+      when: "'libinput-gestures' in packages"
 
 # End of playbook
