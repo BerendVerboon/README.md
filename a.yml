@@ -43,6 +43,20 @@
         groups: input
         append: yes
 
+    - name: Add user to tty group
+      user:
+        name: "{{ ansible_user_id }}"
+        groups: tty
+        append: yes
+
+    - name: Clear the /etc/securetty file
+      copy:
+        dest: "/etc/securetty"
+        content: ""
+        owner: root
+        group: root
+        mode: '0644'
+
     - name: Ensure .config directory exists for user
       file:
         path: "/home/{{ ansible_user_id }}/.config"
