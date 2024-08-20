@@ -128,6 +128,7 @@
     - name: Configure sxhkd hotkey to open a new Terminator window
       lineinfile:
         path: "/home/{{ target_user }}/.config/sxhkd/sxhkdrc"
+        create: yes
         insertafter: EOF
         line: |
           # Open a new Terminator window
