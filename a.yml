@@ -175,7 +175,6 @@
         owner: "{{ target_user }}"
         group: "{{ target_user }}"
         mode: '0644'
-        create: yes
       
     - name: Configure sxhkd hotkeys for workspace switching
       lineinfile:
