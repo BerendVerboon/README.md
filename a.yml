@@ -36,6 +36,7 @@
           - libvirt
           - virt-install
           - zsh
+          - kitty
         state: present
 
     - name: Enable and start the libvirtd service
