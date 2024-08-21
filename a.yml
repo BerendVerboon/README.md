@@ -35,6 +35,7 @@
           - qemu
           - libvirt
           - virt-install
+          - zsh
         state: present
 
     - name: Enable and start the libvirtd service
