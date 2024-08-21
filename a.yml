@@ -14,22 +14,22 @@
       pacman:
         name:
           - xorg
-          - bspwm
-          - sxhkd
-          - terminator
-          - xorg-xinit
-          - xterm
-          - feh
-          - xorg-xauth
-          - polybar
-          - xf86-input-libinput
-          - alsa-utils
-          - lm_sensors
-          - sysstat
-          - virt-manager
+          #- bspwm
+          #- sxhkd
+          #- terminator
+          #- xorg-xinit
+          #- xterm
+          #- feh
+          #- xorg-xauth
+          #- polybar
+          #- xf86-input-libinput
+          #- alsa-utils
+          #- lm_sensors
+          #- sysstat
+          #- virt-manager
           #- qemu
-          - libvirt
-          - virt-install
+          #- libvirt
+          #- virt-install
         state: present
 
     - name: Enable and start the libvirtd service
