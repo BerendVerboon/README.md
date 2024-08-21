@@ -158,7 +158,7 @@
         regexp: '^super + left'
         line: |
           super + bracket{left,right}
-	          bspc desktop -f {prev,next}.local
+	        spc desktop -f {prev,next}.local
         owner: "{{ target_user }}"
         group: "{{ target_user }}"
         mode: '0644'
