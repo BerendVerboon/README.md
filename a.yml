@@ -14,8 +14,8 @@
       pacman:
         name:
           - xorg
-          #- bspwm
-          #- sxhkd
+          - bspwm
+          - sxhkd
           #- terminator
           #- xorg-xinit
           #- xterm
