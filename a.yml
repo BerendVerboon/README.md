@@ -36,6 +36,7 @@
           - virt-install
           - zsh
           - kitty
+          - neovim
         state: present
 
     - name: Enable and start the libvirtd service
@@ -150,19 +151,27 @@
         mode: '0644'
         create: yes #
 
-    - name: Configure kitty with Gruvbox Material Colorscheme
+    - name: Configure kitty config
       copy:
-        src: "kitty.conf"
+        src: "kitty/kitty.conf"
         dest: "/home/{{ target_user }}/.config/kitty/kitty.conf"
         owner: "{{ target_user }}"
         group: "{{ target_user }}"
         mode: '0644'
      
 
-    - name: Configure kitty with Gruvbox Material Colorscheme
+    - name: Configure kitty colorscheme
       copy:
-        src: "colorscheme.conf"
+        src: "kitty/colorscheme.conf"
         dest: "/home/{{ target_user }}/.config/kitty/colorscheme.conf"
+        owner: "{{ target_user }}"
+        group: "{{ target_user }}"
+        mode: '0644'
+
+    - name: Configure polybar config
+      copy:
+        src: "polybar/config"
+        dest: "/home/{{ target_user }}/.config/polybar/config"
         owner: "{{ target_user }}"
         group: "{{ target_user }}"
         mode: '0644'
