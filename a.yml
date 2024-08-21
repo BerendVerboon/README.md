@@ -152,6 +152,32 @@
         mode: '0644'
         create: yes #
 
+    - name: Configure sxhkd hotkeys to switch to the workspace on the left with 'super + left'
+      lineinfile:
+        path: "/home/{{ target_user }}/.config/sxhkd/sxhkdrc"
+        regexp: '^super + left'
+        line: |
+          # Switch to the workspace on the left
+          super + left
+              bspc desktop -f prev.local
+        owner: "{{ target_user }}"
+        group: "{{ target_user }}"
+        mode: '0644'
+        create: yes
+
+    - name: Configure sxhkd hotkeys to switch to the workspace on the right with 'super + right'
+      lineinfile:
+        path: "/home/{{ target_user }}/.config/sxhkd/sxhkdrc"
+        regexp: '^super + right'
+        line: |
+          # Switch to the workspace on the right
+          super + right
+              bspc desktop -f next.local
+        owner: "{{ target_user }}"
+        group: "{{ target_user }}"
+        mode: '0644'
+        create: yes
+
     - name: Configure kitty config
       copy:
         src: "kitty/kitty.conf"
@@ -266,10 +292,10 @@
               <property name="composed_gestures_time">0</property>
             </settings>
             <application name="All">
-              <gesture type="DRAG" fingers="3" direction="LEFT">
+              <gesture type="SWIPE" fingers="3" direction="LEFT">
                 <action type="SEND_KEYS">Super+Left</action>
               </gesture>
-              <gesture type="DRAG" fingers="3" direction="RIGHT">
+              <gesture type="SWIPE" fingers="3" direction="RIGHT">
                 <action type="SEND_KEYS">Super+Right</action>
               </gesture>
             </application>
