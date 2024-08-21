@@ -189,17 +189,21 @@
         group: "{{ target_user }}"
         mode: '0644'
       
-    - name: Configure sxhkd hotkeys for workspace switching
+    - name: Configure sxhkd hotkeys for workspace switching with 'super + left/right'
       lineinfile:
         path: "/home/{{ target_user }}/.config/sxhkd/sxhkdrc"
         insertafter: EOF
         line: |
-          # Workspace switching
-          super + {1-9,0}
-              bspc desktop -f '^{1-9,10}'
+          # Workspace switching to the left
+          super + left
+              bspc desktop -f prev.local
+          # Workspace switching to the right
+          super + right
+              bspc desktop -f next.local
         owner: "{{ target_user }}"
         group: "{{ target_user }}"
         mode: '0644'
+        create: yes
 
     - name: Copy bspwm configuration
       copy:
