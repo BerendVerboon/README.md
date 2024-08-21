@@ -58,7 +58,7 @@
       changed_when: "'Cloning Oh My Zsh' in ohmyzsh_install.stdout"  # mark the task as changed if Oh My Zsh is cloned
       check_mode: no  # ensure this command is executed even in check mode
       async: 60  # run the task asynchronously with a timeout of 60s
-      poll: 10  # check the status every 10 seconds
+      poll: 10  # check the status every 10 seconds 
 
     - name: Install kitty terminal emulator
       apt:
