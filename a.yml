@@ -37,7 +37,7 @@
           - zsh
           - kitty
           - neovim
-          - toucegg
+          - touchegg
         state: present
 
     - name: Enable and start the libvirtd service
