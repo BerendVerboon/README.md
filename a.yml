@@ -23,9 +23,9 @@
           - xorg-xauth
           - polybar
           - xf86-input-libinput
-          - alsa-utils
-          - lm_sensors
-          - sysstat
+          #- alsa-utils
+          #- lm_sensors
+          #- sysstat
           #- virt-manager
           #- qemu
           #- libvirt
