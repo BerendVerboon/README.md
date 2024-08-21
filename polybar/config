@@ -38,7 +38,7 @@ blue = #7daea3
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [bar/example]
-width = 100%
+width = 70%
 height = 18
 radius = 0.0
 fixed-center = true
