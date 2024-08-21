@@ -355,7 +355,7 @@
           # Start sxhkd (Simple X Hotkey Daemon)
           sxhkd & 
 
-          # Start the window manager or desktop environment
+          # Start the window manager or desktop environmen
           exec bspwm
         owner: "{{ target_user }}"
         group: "{{ target_user }}"
