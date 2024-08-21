@@ -37,6 +37,7 @@
           - zsh
           - kitty
           - neovim
+          - toucegg
         state: present
 
     - name: Enable and start the libvirtd service
@@ -246,6 +247,41 @@
         owner: "{{ target_user }}"
         group: "{{ target_user }}"
         mode: '0755'
+
+    - name: Install touchegg
+      pacman:
+        name: touchegg
+        state: present
+
+    - name: Configure touchegg for three-finger swipe gestures
+      copy:
+        dest: "/home/{{ target_user }}/.config/touchegg/touchegg.conf"
+        content: |
+          <?xml version="1.0"?>
+          <touchégg>
+            <settings>
+              <property name="composed_gestures_time">0</property>
+            </settings>
+            <application name="All">
+              <gesture type="DRAG" fingers="3" direction="LEFT">
+                <action type="SEND_KEYS">Super+Left</action>
+              </gesture>
+              <gesture type="DRAG" fingers="3" direction="RIGHT">
+                <action type="SEND_KEYS">Super+Right</action>
+              </gesture>
+            </application>
+          </touchégg>
+        owner: "{{ target_user }}"
+        group: "{{ target_user }}"
+        mode: '0644'
+
+    - name: Enable touchegg service for the target user
+      systemd:
+        name: touchegg.service
+        enabled: yes
+        state: started
+        user: "{{ target_user }}"
+        daemon_reload: yes
 
     - name: Copy .xinitrc file to user's home directory
       copy:
