@@ -143,7 +143,7 @@
         owner: "{{ target_user }}"
         group: "{{ target_user }}"
         mode: '0644'
-        content: 
+        content: |
           #: Cursor customization {{{
 
           #: Default cursor color
@@ -387,7 +387,7 @@
         owner: "{{ target_user }}"
         group: "{{ target_user }}"
         mode: '0644'
-        content: 
+        content: |
             background #282828
             foreground #d4be98
 
