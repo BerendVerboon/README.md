@@ -21,7 +21,7 @@
           - xterm
           - feh
           - xorg-xauth
-          #- polybar
+          - polybar
           #- xf86-input-libinput
           #- alsa-utils
           #- lm_sensors
