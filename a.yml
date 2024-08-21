@@ -157,22 +157,8 @@
         path: "/home/{{ target_user }}/.config/sxhkd/sxhkdrc"
         regexp: '^super + left'
         line: |
-          # Switch to the workspace on the left
-          super + left
-              bspc desktop -f prev.local
-        owner: "{{ target_user }}"
-        group: "{{ target_user }}"
-        mode: '0644'
-        create: yes
-
-    - name: Configure sxhkd hotkeys to switch to the workspace on the right with 'super + right'
-      lineinfile:
-        path: "/home/{{ target_user }}/.config/sxhkd/sxhkdrc"
-        regexp: '^super + right'
-        line: |
-          # Switch to the workspace on the right
-          super + right
-              bspc desktop -f next.local
+          super + bracket{left,right}
+	          bspc desktop -f {prev,next}.local
         owner: "{{ target_user }}"
         group: "{{ target_user }}"
         mode: '0644'
