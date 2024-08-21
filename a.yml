@@ -141,7 +141,10 @@
       lineinfile:
         path: "/home/{{ target_user }}/.config/sxhkd/sxhkdrc"
         regexp: '^super + Return'
-        line: 'super + Return\n    kitty'
+        line: |
+          # Workspace switching
+          super + Return
+              kitty
         owner: "{{ target_user }}"
         group: "{{ target_user }}"
         mode: '0644'
@@ -348,6 +351,9 @@
 
           # Launch polybar
           polybar example &
+
+          # Start sxhkd (Simple X Hotkey Daemon)
+          sxhkd & 
 
           # Start the window manager or desktop environment
           exec bspwm
