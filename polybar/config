@@ -248,18 +248,7 @@ label-unmounted-foreground = #55
 
 label-mounted-foreground = ${colors.blue}
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-[module/windowtitle]
-type = internal/xwindow
-format = <label>
-;format-background = ${colors.cyan}
-format-foreground = ${colors.cyan}
-format-padding = 1
-label = "  %title%"
-label-maxlen = 50
-label-empty = "   free"
-label-separator = " "
-label-empty-foreground = ${colors.cyan}
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [module/volume]
 type = internal/pulseaudio
@@ -409,8 +398,6 @@ content = "ﴚ"
 ;content-background = ${colors.red}
 content-foreground = ${colors.red}
 content-padding = 2
-click-left = $HOME/.config/polybar/scripts/rofi-poweroff.sh
-click-right = $HOME/.config/polybar/scripts/rofi-poweroff.sh 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [settings]
 screenchange-reload = true
