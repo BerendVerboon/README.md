@@ -20,9 +20,9 @@
           - xorg-xinit
           - xterm
           - feh
-          - xorg-xauth
-          - polybar
-          - xf86-input-libinput
+          #- xorg-xauth
+          #- polybar
+          #- xf86-input-libinput
           #- alsa-utils
           #- lm_sensors
           #- sysstat
