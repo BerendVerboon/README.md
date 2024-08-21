@@ -27,7 +27,7 @@
           - lm_sensors
           - sysstat
           - virt-manager
-          - qemu
+          #- qemu
           - libvirt
           - virt-install
         state: present
