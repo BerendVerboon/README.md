@@ -152,18 +152,6 @@
         mode: '0644'
         create: yes #
 
-    - name: Configure sxhkd hotkeys to switch workspaces with 'super + {left,right}'
-      lineinfile:
-        path: "/home/{{ target_user }}/.config/sxhkd/sxhkdrc"
-        regexp: '^super + bracket\\{left,right\\}'
-        line: |
-          super + bracket{left,right}
-              bspc desktop -f {prev,next}.local
-        owner: "{{ target_user }}"
-        group: "{{ target_user }}"
-        mode: '0644'
-        create: yes
-
     - name: Configure kitty config
       copy:
         src: "kitty/kitty.conf"
@@ -195,15 +183,27 @@
         insertafter: EOF
         line: |
           # Workspace switching to the left
-          super + left
+          super + Left
               bspc desktop -f prev.local
           # Workspace switching to the right
-          super + right
+          super + Right
               bspc desktop -f next.local
         owner: "{{ target_user }}"
         group: "{{ target_user }}"
         mode: '0644'
         create: yes
+
+    - name: Configure sxhkd hotkeys for workspace switching
+      lineinfile:
+        path: "/home/{{ target_user }}/.config/sxhkd/sxhkdrc"
+        insertafter: EOF
+        line: |
+          # Workspace switching
+          super + {1-9,0}
+              bspc desktop -f '^{1-9,10}'
+        owner: "{{ target_user }}"
+        group: "{{ target_user }}"
+        mode: '0644'
 
     - name: Copy bspwm configuration
       copy:
@@ -283,10 +283,10 @@
             </settings>
             <application name="All">
               <gesture type="SWIPE" fingers="3" direction="LEFT">
-                <action type="SEND_KEYS">Super+Left</action>
+                <action type="SEND_KEYS">super+Left</action>
               </gesture>
               <gesture type="SWIPE" fingers="3" direction="RIGHT">
-                <action type="SEND_KEYS">Super+Right</action>
+                <action type="SEND_KEYS">super+Right</action>
               </gesture>
             </application>
           </touchégg>
@@ -321,6 +321,8 @@
 
           # Start sxhkd (Simple X Hotkey Daemon)
           sxhkd & 
+
+          touchegg &
 
           # Start the window manager or desktop environmen
           exec bspwm
