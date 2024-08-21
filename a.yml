@@ -3,7 +3,7 @@
   connection: local #
   become: yes
   vars:
-    target_user: john
+    target_user: "{{ lookup('env', 'TARGET_USER') | default('john', false) }}"
 
   tasks:
     - name: Debug .xinitrc destination path
@@ -28,14 +28,8 @@
           - sysstat
           - virt-manager
           - qemu
-          #- qemu-arch-extra  # This package contains the KVM modules for Arch Linux
           - libvirt
           - virt-install
-          #- bridge-utils
-          #- dnsmasq          # Required for providing dhcp services on the default network
-          #- iptables         # Required to set up NAT forwarding on the default network
-          #- ebtables         # Optional, used for bridging
-          #- openbsd-netcat   # Required for certain libvirt communications
         state: present
 
     - name: Enable and start the libvirtd service
@@ -44,6 +38,34 @@
         enabled: yes
         state: started
         daemon_reload: yes
+
+    - name: Set zsh as the default shell for the target user
+      user:
+        name: "{{ target_user }}"
+        shell: /bin/zsh
+
+    - name: Install Oh My Zsh for the target user
+      become_user: "{{ target_user }}"  # become the target user for this task
+      shell: |
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+      args:
+        executable: /bin/bash  # ensure we're running the command with bash
+      environment:  # setting environment variables
+        RUNZSH: 'no'  # prevent automatic running of zsh after installation
+        CHSH: 'no'  # prevent changing the default shell, since it's already been set to zsh
+        ZSH: "/home/{{ target_user }}/.oh-my-zsh"  # Oh My Zsh installation directory
+      register: ohmyzsh_install  # register the output for debugging
+      changed_when: "'Cloning Oh My Zsh' in ohmyzsh_install.stdout"  # mark the task as changed if Oh My Zsh is cloned
+      check_mode: no  # ensure this command is executed even in check mode
+      async: 60  # run the task asynchronously with a timeout of 60s
+      poll: 10  # check the status every 10 seconds
+
+    - name: Install kitty terminal emulator
+      apt:
+        name: kitty
+        state: latest
+        update_cache: yes
+      become: yes
 
     - name: Set timezone to Amsterdam
       timezone:
