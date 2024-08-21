@@ -220,6 +220,16 @@
         group: "{{ target_user }}"
         mode: '0755'
 
+    - name: Configure bspwm to open Kitty on workspace II
+      lineinfile:
+        path: "/home/{{ target_user }}/.config/bspwm/bspwmrc"
+        insertbefore: "# Additional settings or rules can be added below"
+        line: "bspc rule -a 'kitty' desktop='^2' follow=on"
+        owner: "{{ target_user }}"
+        group: "{{ target_user }}"
+        mode: '0755'
+        create: yes
+
     - name: Ensure polybar config directory exists
       file:
         path: "/home/{{ target_user }}/.config/polybar"
