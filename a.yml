@@ -137,6 +137,16 @@
         group: "{{ target_user }}"
         mode: '0755'
 
+    - name: Configure sxhkd hotkeys to launch kitty with 'super + Return'
+      lineinfile:
+        path: "/home/{{ target_user }}/.config/sxhkd/sxhkdrc"
+        regexp: '^super + Return'
+        line: 'super + Return\n    kitty'
+        owner: "{{ target_user }}"
+        group: "{{ target_user }}"
+        mode: '0644'
+        create: yes
+
     - name: Configure kitty with Gruvbox Material Colorscheme
       copy:
         src: "kitty.conf"
