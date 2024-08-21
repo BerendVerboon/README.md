@@ -26,7 +26,7 @@
           - alsa-utils
           - lm_sensors
           - sysstat
-          - virt-manager
+          #- virt-manager
           #- qemu
           #- libvirt
           #- virt-install
