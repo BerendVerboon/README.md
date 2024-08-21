@@ -20,7 +20,7 @@
           - xorg-xinit
           - xterm
           - feh
-          #- xorg-xauth
+          - xorg-xauth
           #- polybar
           #- xf86-input-libinput
           #- alsa-utils
