@@ -16,17 +16,17 @@
           - xorg
           - bspwm
           - sxhkd
-          #- terminator
-          #- xorg-xinit
-          #- xterm
-          #- feh
-          #- xorg-xauth
-          #- polybar
-          #- xf86-input-libinput
-          #- alsa-utils
-          #- lm_sensors
-          #- sysstat
-          #- virt-manager
+          - terminator
+          - xorg-xinit
+          - xterm
+          - feh
+          - xorg-xauth
+          - polybar
+          - xf86-input-libinput
+          - alsa-utils
+          - lm_sensors
+          - sysstat
+          - virt-manager
           #- qemu
           #- libvirt
           #- virt-install
