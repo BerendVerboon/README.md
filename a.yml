@@ -145,7 +145,7 @@
         owner: "{{ target_user }}"
         group: "{{ target_user }}"
         mode: '0644'
-        create: yes
+        create: yes #
 
     - name: Configure kitty with Gruvbox Material Colorscheme
       copy:
