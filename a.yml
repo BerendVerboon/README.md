@@ -51,7 +51,14 @@
         name: "{{ target_user }}"
         shell: /bin/zsh
 
+    - name: Check if Oh My Zsh is already installed
+      stat:
+        path: "/home/{{ target_user }}/.oh-my-zsh"
+      register: ohmyzsh_installed
+      become_user: "{{ target_user }}"  # Check as the target user
+
     - name: Install Oh My Zsh for the target user
+      when: not ohmyzsh_installed.stat.exists  # Run only if Oh My Zsh isn't installed
       become_user: "{{ target_user }}"  # become the target user for this task
       shell: |
         sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -62,17 +69,10 @@
         CHSH: 'no'  # prevent changing the default shell, since it's already been set to zsh
         ZSH: "/home/{{ target_user }}/.oh-my-zsh"  # Oh My Zsh installation directory
       register: ohmyzsh_install  # register the output for debugging
-      changed_when: "'Cloning Oh My Zsh' in ohmyzsh_install.stdout"  # mark the task as changed if Oh My Zsh is cloned
-      check_mode: no  # ensure this command is executed even in check mode
+      changed_when: true  # If the task is run, we can assume a change should be marked
       async: 60  # run the task asynchronously with a timeout of 60s
-      poll: 10  # check the status every 10 seconds 
+      poll: 10  # check the status every 10 seconds
 
-    - name: Install kitty terminal emulator
-      apt:
-        name: kitty
-        state: latest
-        update_cache: yes
-      become: yes
 
     - name: Set timezone to Amsterdam
       timezone:
