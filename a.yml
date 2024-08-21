@@ -283,7 +283,6 @@
         name: touchegg.service
         enabled: yes
         state: started
-        user: "{{ target_user }}"
         daemon_reload: yes
 
     - name: Copy .xinitrc file to user's home directory
