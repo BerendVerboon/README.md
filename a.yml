@@ -190,7 +190,7 @@
 
     - name: Configure background
       copy:
-        src: "sxhkd/movie.mp4"
+        src: "sxhkd/video.mp4"
         dest: "/home/{{ target_user }}/.config/sxhkd/movie.mp4"
         owner: "{{ target_user }}"
         group: "{{ target_user }}"
