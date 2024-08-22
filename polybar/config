@@ -137,13 +137,6 @@ label-urgent-padding = ${module/bspwm.label-urgent-padding}
 ; Separator in between workspaces
 ; label-separator = |
 
-[module/shutdown]
-type = custom/text
-content = "ﴚ"
-;content-background = ${colors.red}
-content-foreground = ${colors.red}
-content-padding = 2
-
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Openbox Workspaces ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;
@@ -179,7 +172,7 @@ label-empty-foreground = ${colors.foreground}
 label-empty-background = ${colors.background}
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [module/filesystem]
 type = internal/fs
