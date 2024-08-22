@@ -386,7 +386,7 @@ format-prefix-foreground = #ffffff
 ; Assuming ${colors.white} is defined elsewhere in your config and sets the desired text color
 format-foreground = ${colors.white}
 
-; The label now only needs to display the time since it includes the date as well
+; The label now only needs to display the time since it includes the date as well 
 label = %time%
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [module/shutdown]
