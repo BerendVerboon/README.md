@@ -288,7 +288,7 @@ interval = 3
 
 label = "  %percentage_used%%"
 
-format-prefix-padding = 2
+format-prefix-padding = 2 
 format-prefix-font = 2
 format-prefix-foreground = #ffffff
 ;format-background = ${colors.background}
