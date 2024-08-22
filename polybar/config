@@ -48,7 +48,7 @@ font-1 = "Hack Nerd Font:style=Regular:size=10;2"
 ; MODULES SETUP
 modules-left = bspwm
 modules-center = windowtitle 
-modules-right = filesystem cpu memory volume date shutdown
+modules-right = filesystem cpu memory volume date powermenu
 
 ;tray-position = center
 ;tray-padding = 2
@@ -284,6 +284,24 @@ label-full = 
 format-full-background = ${colors.green}
 format-full-foreground = ${colors.background}
 format-full-prefix-font = 1
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[module/powermenu]
+type = custom/menu
+label-open = " "
+label-open-foreground = ${colors.foreground}
+label-close = " "
+label-close-foreground = ${colors.foreground}
+label-separator = "|"
+menu-0-0 = Logout
+menu-0-0-exec = ~/.config/polybar/powermenu.sh Logout
+menu-0-1 = Reboot
+menu-0-1-exec = ~/.config/polybar/powermenu.sh Reboot
+menu-0-2 = Power Off
+menu-0-2-exec = ~/.config/polybar/powermenu.sh "Power Off"
+menu-0-3 = Hibernate
+menu-0-3-exec = ~/.config/polybar/powermenu.sh Hibernate
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [module/network]
 type = internal/network

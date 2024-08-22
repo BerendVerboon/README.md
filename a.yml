@@ -194,10 +194,26 @@
         group: "{{ target_user }}"
         mode: '0644' #
 
+    - name: Ensure polybar config directory exists
+      file:
+        path: "/home/{{ target_user }}/.config/polybar"
+        state: directory
+        owner: "{{ target_user }}"
+        group: "{{ target_user }}"
+        mode: '0755'
+
     - name: Configure polybar config
       copy:
         src: "polybar/config"
         dest: "/home/{{ target_user }}/.config/polybar/config"
+        owner: "{{ target_user }}"
+        group: "{{ target_user }}"
+        mode: '0644'
+
+    - name: Configure polybar config
+      copy:
+        src: "polybar/powermenu.sh"
+        dest: "/home/{{ target_user }}/.config/polybar/powermenu.sh"
         owner: "{{ target_user }}"
         group: "{{ target_user }}"
         mode: '0644'
@@ -293,13 +309,7 @@
         mode: '0755'
         create: yes
 
-    - name: Ensure polybar config directory exists
-      file:
-        path: "/home/{{ target_user }}/.config/polybar"
-        state: directory
-        owner: "{{ target_user }}"
-        group: "{{ target_user }}"
-        mode: '0755'
+
 
     - name: Ensure .config/touchegg directory exists for user
       file:
