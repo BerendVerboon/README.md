@@ -181,7 +181,7 @@
 
     - name: Configure background
       copy:
-        src: "/home/{{ target_user }}/README.md/background.jpg"
+        src: "sxhkd/background.jpg"
         dest: "/home/{{ target_user }}/.config/sxhkd/background.jpg"
         owner: "{{ target_user }}"
         group: "{{ target_user }}"
