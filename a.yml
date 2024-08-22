@@ -163,7 +163,6 @@
         group: "{{ target_user }}"
         mode: '0644'
      
-
     - name: Configure kitty colorscheme
       copy:
         src: "kitty/colorscheme.conf"
@@ -179,6 +178,16 @@
         owner: "{{ target_user }}"
         group: "{{ target_user }}"
         mode: '0644' #
+
+    - name: Configure lockscreen
+      copy:
+        src: "sxhkd/screen_saver.sh"
+        dest: "/home/{{ target_user }}/.config/sxhkd/screen_saver.sh"
+        owner: "{{ target_user }}"
+        group: "{{ target_user }}"
+        mode: '0644' #
+
+
 
     - name: Configure background
       copy:
