@@ -187,14 +187,6 @@ label-empty-padding = 2
 label-empty-foreground = ${colors.foreground}
 label-empty-background = ${colors.background}
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;
-[module/kernel-name]
-type = custom/script
-exec = uname -r
-interval = 10000
-label = "   %output% "
-format-foreground = ${colors.white}
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -321,7 +313,7 @@ interval = 1
 format-prefix ="   "
 format = <label>
 ;format-background = ${colors.pink}
-format-foreground = ${colors.pink}
+format-foreground = ${colors.pink} john
 format-padding = 0
 
 click-left = bspc desktop -f '^8' --follow
@@ -377,20 +369,25 @@ format-foreground = ${colors.yellow}
 type = internal/date
 interval = 1
 
+; The date format is now empty since we will include the date in the time label
 date = 
-date-alt = "  﨟  %A, %b %d -"
+date-alt = 
 
-time = "  %I:%M %p  "
-time-alt = "%I:%M:%S %p  "
+; The time format now includes the date in DD-MM-YYYY format followed by the time in 24-hour format with seconds
+time = "%d-%m-%Y %H:%M:%S"
+time-alt = 
 
+; You can remove or comment out the format-prefix lines if you don't want any prefix icon
 ;format-prefix = ""
 format-prefix-padding = 1
 format-prefix-font = 1
 format-prefix-foreground = #ffffff
-;format-background = ${colors.background}
+
+; Assuming ${colors.white} is defined elsewhere in your config and sets the desired text color
 format-foreground = ${colors.white}
 
-label = %date% %time%
+; The label now only needs to display the time since it includes the date as well
+label = %time%
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [module/shutdown]
 type = custom/text
