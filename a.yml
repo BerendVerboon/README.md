@@ -39,6 +39,7 @@
           - neovim
           - touchegg
           - pulseaudio 
+          - i3lock
         state: present
 
     - name: Enable and start the libvirtd service
@@ -178,22 +179,6 @@
         group: "{{ target_user }}"
         mode: '0644'
 
-    - name: Create polybar scripts directory
-      file:
-        path: "/home/{{ target_user }}/.config/polybar/scripts"
-        state: directory
-        owner: "{{ target_user }}"
-        group: "{{ target_user }}"
-        mode: '0755'
-
-    - name: Configure shutdown buttons
-      copy:
-        src: "polybar/scripts/poweroff.sh"
-        dest: "/home/{{ target_user }}/.config/polybar/scripts/poweroff.sh"
-        owner: "{{ target_user }}"
-        group: "{{ target_user }}"
-        mode: '0644'
-      
     - name: Configure sxhkd hotkeys for workspace switching with 'super + left/right'
       lineinfile:
         path: "/home/{{ target_user }}/.config/sxhkd/sxhkdrc"
@@ -218,6 +203,18 @@
           # Workspace switching
           super + {1-9,0}
               bspc desktop -f '^{1-9,10}'
+        owner: "{{ target_user }}"
+        group: "{{ target_user }}"
+        mode: '0644'
+
+    - name: Configure sxhkd hotkey for screen locking
+      lineinfile:
+        path: "/home/{{ target_user }}/.config/sxhkd/sxhkdrc"
+        insertafter: EOF
+        line: |
+          # Lock the screen
+          super + l
+              i3lock
         owner: "{{ target_user }}"
         group: "{{ target_user }}"
         mode: '0644'

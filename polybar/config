@@ -143,8 +143,6 @@ content = "ﴚ"
 ;content-background = ${colors.red}
 content-foreground = ${colors.red}
 content-padding = 2
-click-left = $HOME/.config/polybar/scripts/poweroff.sh
-click-right = $HOME/.config/polybar/scripts/poweroff.sh 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Openbox Workspaces ;;
