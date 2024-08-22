@@ -40,6 +40,7 @@
           - touchegg
           - pulseaudio 
           - i3lock
+          - mpv
         state: present
 
     - name: Enable and start the libvirtd service
@@ -183,6 +184,14 @@
       copy:
         src: "sxhkd/background.jpg"
         dest: "/home/{{ target_user }}/.config/sxhkd/background.jpg"
+        owner: "{{ target_user }}"
+        group: "{{ target_user }}"
+        mode: '0644' #
+
+    - name: Configure background
+      copy:
+        src: "sxhkd/movie.mp4"
+        dest: "/home/{{ target_user }}/.config/sxhkd/movie.mp4"
         owner: "{{ target_user }}"
         group: "{{ target_user }}"
         mode: '0644' #
