@@ -38,6 +38,7 @@
           - kitty
           - neovim
           - touchegg
+          - pulseaudio 
         state: present
 
     - name: Enable and start the libvirtd service

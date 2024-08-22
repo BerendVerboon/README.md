@@ -48,7 +48,6 @@ font-3 = "Sinji:pixelsize=15;5"
 font-4 = "Togalite medium:pixelsize=11;2"
 
 ; MODULES SETUP
-modules-left = theme-swap bspwm kernel-name
 modules-center = windowtitle spotify
 modules-right = pacman-updates filesystem cpu memory volume date shutdown
 
@@ -256,17 +255,6 @@ format-connected-foreground = ${colors.background}
 format-disconnected-background = ${colors.white}
 format-disconnected-foreground = ${colors.background}
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-[module/spotify]
-type = custom/script
-interval = 1
-format-prefix ="   "
-format = <label>
-;format-background = ${colors.pink}
-format-foreground = ${colors.pink} john
-format-padding = 0
-
-click-left = bspc desktop -f '^8' --follow
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [module/memory]
 type = internal/memory
