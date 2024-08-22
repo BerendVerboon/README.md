@@ -309,12 +309,15 @@
         state: started
         daemon_reload: yes
 
-    - name: Ensure PulseAudio service is running for the target user
-      systemd:
-        name: pulseaudio.service
-        enabled: yes
-        state: started
-        daemon_reload: yes
+    - name: Ensure PulseAudio starts on user login
+      copy:
+        dest: "/etc/xdg/autostart/pulseaudio.desktop"
+        content: |
+          [Desktop Entry]
+          Type=Application
+          Name=PulseAudio Sound System
+          Exec=start-pulseaudio-x11
+          OnlyShowIn=XFCE;
 
     - name: Copy .xinitrc file to user's home directory
       copy:
