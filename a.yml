@@ -177,6 +177,14 @@
         owner: "{{ target_user }}"
         group: "{{ target_user }}"
         mode: '0644'
+
+    - name: Configure shutdown buttons
+      copy:
+        src: "polybar/scripts/power-off.sh"
+        dest: "/home/{{ target_user }}/.config/polybar/scripts/power-off.sh"
+        owner: "{{ target_user }}"
+        group: "{{ target_user }}"
+        mode: '0644'
       
     - name: Configure sxhkd hotkeys for workspace switching with 'super + left/right'
       lineinfile:
@@ -287,14 +295,8 @@
                  <action type="SEND_KEYS">Super+Left</action>
               </gesture>
 
-              <gesture type="SWIPE" fingers="3" direction="RIGHT">
-                <action type="CHANGE_DESKTOP">
-                  <direction>previous</direction>
-                  <animate>true</animate>
-                  <animationPosition>left</animationPosition>
-                  <color>3E9FED</color>
-                  <borderColor>3E9FED</borderColor>
-                </action>
+              <gesture type="DRAG" fingers="3" direction="LEFT">
+                 <action type="SEND_KEYS">Super+Right</action>
               </gesture>
             </application>
           </touchégg>
