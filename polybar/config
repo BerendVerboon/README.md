@@ -200,7 +200,7 @@ format-foreground = ${colors.green}
 format-foreground-error = ${colors.red}
 ;format-background = ${colors.green}
 click-left = kitty -e $SHELL -c 'sudo pacman -Syu'
-click-right = bspc rule -a \* -o state=floating ; sleep 0.015 ; kitty -e $SHELL -c 'yay -Qu | less'
+click-right = bspc rule -a * -o state=floating ; sleep 0.015 ; kitty -e $SHELL -c 'yay -Qu | less'
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [module/windowtitle]
