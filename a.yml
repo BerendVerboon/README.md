@@ -171,6 +171,22 @@
         group: "{{ target_user }}"
         mode: '0644' #
 
+    - name: Configure lockscreen
+      copy:
+        src: "/home/{{ target_user }}/README.md/sxhkd/lock.sh"
+        dest: "/home/{{ target_user }}/.config/sxhkd/lock.sh"
+        owner: "{{ target_user }}"
+        group: "{{ target_user }}"
+        mode: '0644' #
+
+    - name: Configure background
+      copy:
+        src: "/home/{{ target_user }}/README.md/background.jpg"
+        dest: "/home/{{ target_user }}/.config/sxhkd/background.jpg"
+        owner: "{{ target_user }}"
+        group: "{{ target_user }}"
+        mode: '0644' #
+
     - name: Configure polybar config
       copy:
         src: "polybar/config"
@@ -207,14 +223,14 @@
         group: "{{ target_user }}"
         mode: '0644'
 
-    - name: Configure sxhkd hotkey for screen locking
+    - name: Configure sxhkd hotkey for screen locking with video
       lineinfile:
         path: "/home/{{ target_user }}/.config/sxhkd/sxhkdrc"
         insertafter: EOF
         line: |
-          # Lock the screen
+          # Lock the screen and play a video
           super + l
-              i3lock
+              /home/{{ target_user }}/.config/sxhkd/lock.sh
         owner: "{{ target_user }}"
         group: "{{ target_user }}"
         mode: '0644'
@@ -339,7 +355,7 @@
           xrdb -merge ~/.Xresources &  # Load X resources (like terminal colors, fonts, etc.)
 
           # Set the background image using feh
-          feh --bg-scale /home/{{ target_user }}/readme.md/background.jpg &
+          feh --bg-scale /home/{{ target_user }}/.config/sxhkd/background.jpg &
 
           # Launch polybar
           polybar example &
