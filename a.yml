@@ -173,7 +173,7 @@
     - name: Configure polybar config
       copy:
         src: "polybar/config"
-        dest: "/home/{{ target_user }}/.config/polybar/config"
+        dest: "/home/{{ target_user }}/.config/polybar/config.ini"
         owner: "{{ target_user }}"
         group: "{{ target_user }}"
         mode: '0644'
@@ -305,6 +305,13 @@
     - name: Enable touchegg service for the target user
       systemd:
         name: touchegg.service
+        enabled: yes
+        state: started
+        daemon_reload: yes
+
+    - name: Ensure PulseAudio service is running for the target user
+      systemd:
+        name: pulseaudio.service
         enabled: yes
         state: started
         daemon_reload: yes

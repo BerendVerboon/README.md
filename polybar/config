@@ -48,7 +48,7 @@ font-3 = "Sinji:pixelsize=15;5"
 font-4 = "Togalite medium:pixelsize=11;2"
 
 ; MODULES SETUP
-modules-center = windowtitle spotify
+modules-center = windowtitle 
 modules-right = pacman-updates filesystem cpu memory volume date shutdown
 
 ;tray-position = center
@@ -189,6 +189,31 @@ label-unmounted-foreground = #55
 
 label-mounted-foreground = ${colors.blue}
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[module/pacman-updates]
+type = custom/script
+exec = $HOME/.config/polybar/scripts/pacman-updates.sh
+interval = 1000
+label = "   %output% "
+format-foreground = ${colors.green}
+format-foreground-error = ${colors.red}
+;format-background = ${colors.green}
+click-left = kitty -e $SHELL -c 'sudo pacman -Syu'
+click-right = bspc rule -a \* -o state=floating ; sleep 0.015 ; kitty -e $SHELL -c 'yay -Qu | less'
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[module/windowtitle]
+type = internal/xwindow
+format = <label>
+;format-background = ${colors.cyan}
+format-foreground = ${colors.cyan}
+format-padding = 1
+label = "  %title%"
+label-maxlen = 50
+label-empty = "   free"
+label-separator = " "
+label-empty-foreground = ${colors.cyan}
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [module/volume]
