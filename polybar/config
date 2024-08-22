@@ -3,11 +3,12 @@
 [colors]
 background = #000000
 background-alt = #665c54
-foreground = #d4be98
-foreground-alt = #282e3a
+foreground = #989898
+foreground-alt = #282828
 primary = #ffb52a
 secondary = #e60053
 alert = #B48EAD
+black = #000000
 
 cyan = #7daea3
 gray = #a89984
@@ -17,7 +18,7 @@ yellow = #d8a657
 green = #a9b665
 orange = #fe8019
 magenta = #d3869b
-white = #d4be98
+white = #989898
 pink = #d3869b
 blue = #7daea3
 
@@ -45,7 +46,7 @@ font-0 = "Source Code Pro:style=Regular:size=10;1"
 font-1 = "Hack Nerd Font:style=Regular:size=10;2"
 
 ; MODULES SETUP
-modules-left = theme-swap bspwm kernel-name
+modules-left = bspwm
 modules-center = windowtitle 
 modules-right = filesystem cpu memory volume date shutdown
 
