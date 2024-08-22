@@ -334,7 +334,7 @@ format-foreground = ${colors.pink}
 
 [module/wired-network]
 type = internal/network
-interface = enp2s0
+interface = enp3s0
 interval = 3.0
 
 udspeed-minwidth = 5
