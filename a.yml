@@ -181,7 +181,7 @@
     - name: Configure shutdown buttons
       copy:
         src: "polybar/scripts/power-off.sh"
-        dest: "/home/{{ target_user }}/.config/polybar/scripts/power-off.sh"
+        dest: "/home/{{ target_user }}/.config/polybar/scripts/poweroff.sh"
         owner: "{{ target_user }}"
         group: "{{ target_user }}"
         mode: '0644'
