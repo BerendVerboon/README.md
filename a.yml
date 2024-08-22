@@ -40,7 +40,6 @@
           - touchegg
           - pulseaudio 
           - i3lock
-          - mpv
         state: present
 
     - name: Enable and start the libvirtd service
@@ -179,16 +178,6 @@
         group: "{{ target_user }}"
         mode: '0644' #
 
-    - name: Configure lockscreen
-      copy:
-        src: "sxhkd/screen_saver.sh"
-        dest: "/home/{{ target_user }}/.config/sxhkd/screen_saver.sh"
-        owner: "{{ target_user }}"
-        group: "{{ target_user }}"
-        mode: '0644' #
-
-
-
     - name: Configure background
       copy:
         src: "sxhkd/background.jpg"
@@ -197,10 +186,10 @@
         group: "{{ target_user }}"
         mode: '0644' #
 
-    - name: Configure background
+    - name: Configure lockscreen
       copy:
-        src: "sxhkd/video.mp4"
-        dest: "/home/{{ target_user }}/.config/sxhkd/movie.mp4"
+        src: "sxhkd/lockscreen.jpg"
+        dest: "/home/{{ target_user }}/.config/sxhkd/lockscreen.jpg"
         owner: "{{ target_user }}"
         group: "{{ target_user }}"
         mode: '0644' #
