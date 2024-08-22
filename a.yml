@@ -173,7 +173,7 @@
 
     - name: Configure lockscreen
       copy:
-        src: "/home/{{ target_user }}/README.md/sxhkd/lock.sh"
+        src: "sxhkd/lock.sh"
         dest: "/home/{{ target_user }}/.config/sxhkd/lock.sh"
         owner: "{{ target_user }}"
         group: "{{ target_user }}"
