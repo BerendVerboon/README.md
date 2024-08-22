@@ -1,7 +1,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [colors]
-background = #000628
+background = #000000
 background-alt = #665c54
 foreground = #d4be98
 foreground-alt = #282e3a
@@ -67,10 +67,10 @@ separator = %{F#665c54}|%{F-}
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [module/bspwm]
 type = internal/bspwm
-;ws-icon-0 = TERM;%{F#A3BE8C}
-;ws-icon-1 = WEB;%{F#D08770}
-;ws-icon-2 = CODE;%{F#81A1C1}﬏
-;ws-icon-3 = MISC;%{F#EBCB8B}
+ws-icon-0 = TERM;%{F#A3BE8C}
+ws-icon-1 = WEB;%{F#D08770}
+ws-icon-2 = CODE;%{F#81A1C1}﬏
+ws-icon-3 = MISC;%{F#EBCB8B}
 ;ws-icon-4 = EDIT;%{F#B48EAD}
 ;ws-icon-5 = CHAT;%{F#88C0D0}
 ;ws-icon-6 = DISCORD;%{F#D08770}ﭮ
