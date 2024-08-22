@@ -181,7 +181,7 @@ label-empty-foreground = ${colors.foreground}
 label-empty-background = ${colors.background}
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [module/filesystem]
 type = internal/fs
