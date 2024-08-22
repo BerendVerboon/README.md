@@ -9,6 +9,9 @@ primary = #ffb52a
 secondary = #e60053
 alert = #B48EAD
 black = #000000
+urgent = #B48EAD
+success = #B48EAD
+warning = #B48EAD
 
 cyan = #7daea3
 gray = #a89984
@@ -48,7 +51,7 @@ font-1 = Symbols Nerd Font:style=2048-em:fontformat-truetype
 ; MODULES SETUP
 modules-left = bspwm
 modules-center = windowtitle 
-modules-right = filesystem cpu memory volume date powermenu
+modules-right = filesystem cpu memory powermenu volume date 
 
 ;tray-position = center
 ;tray-padding = 2
