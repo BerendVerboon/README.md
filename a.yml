@@ -205,7 +205,7 @@
 
     - name: Configure polybar config
       copy: #
-        src: "polybar/config"
+        src: "polybar/config.ini"
         dest: "/home/{{ target_user }}/.config/polybar/config.ini"
         owner: "{{ target_user }}"
         group: "{{ target_user }}"
