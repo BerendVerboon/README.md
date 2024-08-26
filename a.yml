@@ -334,8 +334,14 @@
                  <action type="SEND_KEYS">Super+Left</action>
               </gesture>
 
-              <gesture type="DRAG" fingers="3" direction="LEFT">
-                 <action type="SEND_KEYS">Super+Right</action>
+              <gesture type="SWIPE" fingers="3" direction="RIGHT">
+                <action type="CHANGE_DESKTOP">
+                  <direction>previous</direction>
+                  <animate>true</animate>
+                  <animationPosition>left</animationPosition>
+                  <color>3E9FED</color>
+                  <borderColor>3E9FED</borderColor>
+                </action>
               </gesture>
             </application>
           </touchégg>
