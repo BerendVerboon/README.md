@@ -40,6 +40,7 @@
           - touchegg
           - pulseaudio 
           - i3lock
+          - ttf-font-awesome
         state: present
 
     - name: Enable and start the libvirtd service
@@ -210,7 +211,7 @@
         group: "{{ target_user }}"
         mode: '0644'
 
-    - name: Configure polybar config
+    - name: Configure polybar config #
       copy:
         src: "polybar/powermenu.sh"
         dest: "/home/{{ target_user }}/.config/polybar/powermenu.sh"
