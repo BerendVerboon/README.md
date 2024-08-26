@@ -41,6 +41,7 @@
           - pulseaudio 
           - i3lock
           - ttf-font-awesome
+          - networkmanager
         state: present
 
     - name: Enable and start the libvirtd service
