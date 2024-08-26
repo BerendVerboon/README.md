@@ -203,7 +203,7 @@
         mode: '0755'
 
     - name: Configure polybar config
-      copy:
+      copy: #
         src: "polybar/config"
         dest: "/home/{{ target_user }}/.config/polybar/config.ini"
         owner: "{{ target_user }}"
